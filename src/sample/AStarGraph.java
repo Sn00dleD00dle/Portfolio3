@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.PriorityQueue;
 
 public class AStarGraph {
-    private ArrayList<Vertex> vertices;
+    ArrayList<Vertex> vertices;
 
     public AStarGraph() {
         vertices = new ArrayList<Vertex>();

@@ -10,10 +10,11 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception{
-        AStarGraph graphmodel = createGraph();
-        Parent root = FXMLLoader.load(getClass().getResource("sample.fxml"));
+        AStarGraph graphModel = createGraph();
+        AStarView AStarView = new AStarView(graphModel);
+        Controller controller = new Controller(graphModel, AStarView);
         primaryStage.setTitle("AStar Graph");
-        primaryStage.setScene(new Scene(root, 300, 275));
+        primaryStage.setScene(new Scene(AStarView.asParent(), 300, 275));
         primaryStage.show();
     }
 
@@ -58,7 +59,7 @@ public class Main extends Application {
         MyMaze.newconnection(G, I, 2.82);
         MyMaze.newconnection(H, J, 4.41);
         MyMaze.newconnection(I, J, 3.82);
-        return AStarGraph;
+        return MyMaze;
     }
 
 }

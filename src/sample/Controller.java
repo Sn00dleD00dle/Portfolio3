@@ -15,7 +15,6 @@ public class Controller {
         this.model = graphModel;
         this.view = viewAStar;
         view.exitButton.setOnAction(e-> Platform.exit());
-        // Add button to change heuristics
         EventHandler<ActionEvent> printRequestHandler= e->handlePrintRequest(view.startVertexCombobox.getValue(), view.endVertexCombobox.getValue(),view.heuristicsBox.getValue(), view.shortestPathTA);
         view.printButton.setOnAction(printRequestHandler);
     }

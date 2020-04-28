@@ -16,14 +16,15 @@ public class Controller {
         this.view = viewAStar;
         view.exitButton.setOnAction(e-> Platform.exit());
         // Add button to change heuristics
-        EventHandler<ActionEvent> printRequestHandler= e->handlePrintRequest(view.startVertexCombobox.getValue(), view.endVertexCombobox.getValue(),view.shortestPathTA);
+        EventHandler<ActionEvent> printRequestHandler= e->handlePrintRequest(view.startVertexCombobox.getValue(), view.endVertexCombobox.getValue(),view.heuristicsBox.getValue(), view.shortestPathTA);
         view.printButton.setOnAction(printRequestHandler);
     }
 
 
-    public void handlePrintRequest(Vertex start, Vertex destination, TextArea TArea){
-        AStarGraph.A_Star(start,destination);
-        TArea.appendText("Found a path!");
+    public void handlePrintRequest(Vertex start, Vertex destination, String heuristics, TextArea TArea){
+        model.A_Star(start,destination,heuristics);
+        TArea.appendText("Chosen heuristic: " + heuristics+"\n");
+        TArea.appendText("Found a path!\n");
         Vertex pvertex=destination;
         // to print path
         Stack<Vertex> Path = new Stack<>();

@@ -19,7 +19,7 @@ public class AStarGraph {
         v2.addOutEdge(v1, dist);
     }
 
-    public boolean A_Star(Vertex start, Vertex destination) {
+    public boolean A_Star(Vertex start, Vertex destination, String heuristics) {
         if (start == null || destination == null)
             return false;
         PriorityQueue<Vertex> Openlist = new PriorityQueue<Vertex>();
@@ -29,15 +29,25 @@ public class AStarGraph {
         ArrayList<Vertex> CurrentNeighbors;
         Vertex Neighbor;
         //Initialize h with chosen heuristic
-        for (int i = 0; i < vertices.size(); i++) {
-            vertices.get(i).seth(Manhattan(vertices.get(i), destination));
+        if (heuristics.equals("Manhattan")){
+            for (int i = 0; i < vertices.size(); i++) {
+                vertices.get(i).seth(Manhattan(vertices.get(i), destination));
+                //System.out.println(vertices.get(i).getid() + " h: " + vertices.get(i).geth());
+            }
+
+        }
+        if (heuristics.equals("Euclidean")){
+            for (int i = 0; i < vertices.size(); i++) {
+                vertices.get(i).seth(Euclidean(vertices.get(i), destination));
+                //System.out.println(vertices.get(i).getid() + " h: " + vertices.get(i).geth());
+            }
         }
         Openlist.remove(start);
         start.setg(0.0);
         start.calculatef();
         Openlist.offer(start);
         //Start algorithm
-        System.out.println("Start Algorithm");
+        //System.out.println("Start Algorithm");
         while (!Openlist.isEmpty()) {
             Current = Openlist.remove();
             if (Current == destination) {

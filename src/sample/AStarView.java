@@ -15,9 +15,11 @@ public class AStarView {
     Label startVertexLbl = new Label("Select start vertex: ");
     ComboBox<Vertex> startVertexCombobox = new ComboBox<Vertex>();
     //Button HeuristicsButton = new Button("????"); // Make button to change heuristics
+    Label heuristicsLabel = new Label("Select heuristics: ");
+    ComboBox<String> heuristicsBox = new ComboBox<String>();
     Label endVertexLbl = new Label("Select destination: ");
     ComboBox<Vertex> endVertexCombobox = new ComboBox<Vertex>();
-    Button printButton = new Button("Print shortest path to destination: ");
+    Button printButton = new Button("Print path to destination: ");
     TextArea shortestPathTA = new TextArea();
 
     public AStarView(AStarGraph graphModel){
@@ -29,6 +31,7 @@ public class AStarView {
         startView.setHgap(1);
 
         ObservableList<Vertex> vertexList = FXCollections.observableArrayList(model.vertices);
+        ObservableList<String> heuristics = FXCollections.observableArrayList("Manhattan", "Euclidean");
 
         Callback<ListView<Vertex>, ListCell<Vertex>> VertexcellFactory = new Callback<ListView<Vertex>, ListCell<Vertex>>() {
             @Override
@@ -49,18 +52,19 @@ public class AStarView {
         startVertexCombobox.setItems(vertexList);
         startVertexCombobox.setButtonCell(VertexcellFactory.call(null));
         startVertexCombobox.setCellFactory(VertexcellFactory);
-        startVertexCombobox.setValue(model.vertices.get(0));
+
+        heuristicsBox.setItems(heuristics);
 
         endVertexCombobox.setItems((vertexList));
         endVertexCombobox.setButtonCell(VertexcellFactory.call(null));
         endVertexCombobox.setCellFactory(VertexcellFactory);
-        endVertexCombobox.setValue(model.vertices.get(0));
 
         shortestPathTA.setPrefColumnCount(1);
         // Add controls to pane
         startView.add(startVertexLbl,1,1);
         startView.add(startVertexCombobox,15,1);
-        //startView.add(HeuristicsButton,15,2);
+        startView.add(heuristicsLabel,1,2);
+        startView.add(heuristicsBox,15,2);
         startView.add(endVertexLbl,1,3);
         startView.add(endVertexCombobox,15,3);
         startView.add(printButton,15,4);

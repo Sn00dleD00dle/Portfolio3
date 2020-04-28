@@ -14,7 +14,7 @@ public class Main extends Application {
         AStarView AStarView = new AStarView(graphModel);
         Controller controller = new Controller(graphModel, AStarView);
         primaryStage.setTitle("AStar Graph");
-        primaryStage.setScene(new Scene(AStarView.asParent(), 300, 275));
+        primaryStage.setScene(new Scene(AStarView.asParent(), 400, 300));
         primaryStage.show();
     }
 
